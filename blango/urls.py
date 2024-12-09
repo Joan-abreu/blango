@@ -1,3 +1,5 @@
+import blog.views
+
 """blango URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -14,9 +16,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('blog.urls')),
+    path("", blog.views.index),
+    path("post/<slug>/", blog.views.post_detail, name="blog-post-detail")
 ]
