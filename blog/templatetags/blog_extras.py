@@ -3,7 +3,9 @@ from django import template
 from django.utils.html import escape, format_html
 from django.utils.safestring import mark_safe
 from blog.models import Post
+import logging
 
+logger = logging.getLogger(__name__)
 
 user_model = get_user_model()
 register = template.Library()
