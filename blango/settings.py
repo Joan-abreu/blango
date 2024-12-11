@@ -48,6 +48,7 @@ class Dev(Configuration):
       'django.contrib.sessions',
       'django.contrib.messages',
       'django.contrib.staticfiles',
+			'blango_auth',
       'blog',
       'crispy_forms',
       'crispy_bootstrap5',
@@ -175,3 +176,5 @@ class Dev(Configuration):
       '127.0.0.1',
       '192.168.11.179',  # Esta es una IP comúnmente utilizada en entornos de contenedores de Codio.
   ]
+
+  AUTH_USER_MODEL = 'blango_auth.User'
