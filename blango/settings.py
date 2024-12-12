@@ -61,6 +61,7 @@ class Dev(Configuration):
 			'rest_framework',
       'rest_framework.authtoken',
 			'django_filters',
+            'versatileimagefield',
   ]
 
   MIDDLEWARE = [
@@ -243,3 +244,6 @@ class Dev(Configuration):
 					'django_filters.rest_framework.DjangoFilterBackend',
 			],
 	}
+  MEDIA_ROOT = BASE_DIR / "media"
+
+  MEDIA_URL = "/media/"
