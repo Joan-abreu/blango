@@ -58,6 +58,9 @@ class Dev(Configuration):
 			'allauth.account',
 			'allauth.socialaccount',
 			'allauth.socialaccount.providers.google',
+			'rest_framework',
+      'rest_framework.authtoken',
+			'django_filters',
   ]
 
   MIDDLEWARE = [
@@ -192,3 +195,53 @@ class Dev(Configuration):
   ACCOUNT_EMAIL_REQUIRED = True
   ACCOUNT_USERNAME_REQUIRED = False
   ACCOUNT_AUTHENTICATION_METHOD = "email"
+
+  REST_FRAMEWORK = {
+			# Authentication settings
+			'DEFAULT_AUTHENTICATION_CLASSES': [
+					'rest_framework.authentication.SessionAuthentication',
+					'rest_framework.authentication.BasicAuthentication',
+					# Add other authentication methods like TokenAuthentication if needed
+			],
+
+			# Permission settings
+			'DEFAULT_PERMISSION_CLASSES': [
+					'rest_framework.permissions.IsAuthenticated',  # Default permission for authenticated users
+			],
+
+			# Pagination settings (optional)
+			'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',  # Pagination style
+			'PAGE_SIZE': 10,  # Number of items per page
+
+			# Throttling settings
+			"DEFAULT_THROTTLE_CLASSES": [
+            "blog.api.throttling.AnonSustainedThrottle",
+            "blog.api.throttling.AnonBurstThrottle",
+            "blog.api.throttling.UserSustainedThrottle",
+            "blog.api.throttling.UserBurstThrottle",
+      ],
+      "DEFAULT_THROTTLE_RATES": {
+            "anon_sustained": "500/day",
+            "anon_burst": "10/minute",
+            "user_sustained": "5000/day",
+            "user_burst": "100/minute",
+      },
+
+			# Renderer settings (optional, you can specify which response formats are accepted)
+			'DEFAULT_RENDERER_CLASSES': [
+					'rest_framework.renderers.JSONRenderer',  # JSON response renderer (default)
+					# You can add other renderers like BrowsableAPIRenderer if needed
+			],
+
+			# Parser settings (optional, can define which content types are accepted)
+			'DEFAULT_PARSER_CLASSES': [
+					'rest_framework.parsers.JSONParser',  # JSON parser (default)
+			],
+
+			# Filters settings (optional, for DRF filters)
+			'DEFAULT_FILTER_BACKENDS': [
+					'rest_framework.filters.OrderingFilter',
+					'rest_framework.filters.SearchFilter',
+					'django_filters.rest_framework.DjangoFilterBackend',  # If using django-filter
+			],
+	}

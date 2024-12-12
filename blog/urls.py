@@ -1,7 +1,9 @@
 from django.urls import path
-from blog.views import index, post_detail
+from .views import PostListCreateView, PostRetrieveUpdateDestroyView, CommentListCreateView, AuthorProfileDetailView
 
 urlpatterns = [
-    path("", index, name="index"),
-		path("post/<slug>/", post_detail, name="blog-post-detail")
+    path('posts/', PostListCreateView.as_view(), name='post-list-create'),
+    path('posts/<int:pk>/', PostRetrieveUpdateDestroyView.as_view(), name='post-retrieve-update-destroy'),
+    path('comments/', CommentListCreateView.as_view(), name='comment-list-create'),
+    path('author-profile/<int:pk>/', AuthorProfileDetailView.as_view(), name='author-profile-detail'),
 ]
