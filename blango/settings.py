@@ -201,17 +201,15 @@ class Dev(Configuration):
 			'DEFAULT_AUTHENTICATION_CLASSES': [
 					'rest_framework.authentication.SessionAuthentication',
 					'rest_framework.authentication.BasicAuthentication',
-					# Add other authentication methods like TokenAuthentication if needed
 			],
 
 			# Permission settings
 			'DEFAULT_PERMISSION_CLASSES': [
-					'rest_framework.permissions.IsAuthenticated',  # Default permission for authenticated users
+					'rest_framework.permissions.IsAuthenticated',
 			],
-
 			# Pagination settings (optional)
-			'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',  # Pagination style
-			'PAGE_SIZE': 10,  # Number of items per page
+			'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+			'PAGE_SIZE': 100,
 
 			# Throttling settings
 			"DEFAULT_THROTTLE_CLASSES": [
@@ -240,8 +238,6 @@ class Dev(Configuration):
 
 			# Filters settings (optional, for DRF filters)
 			'DEFAULT_FILTER_BACKENDS': [
-					'rest_framework.filters.OrderingFilter',
-					'rest_framework.filters.SearchFilter',
-					'django_filters.rest_framework.DjangoFilterBackend',  # If using django-filter
+					'django_filters.rest_framework.DjangoFilterBackend',
 			],
 	}
